@@ -14,7 +14,7 @@ class CreateSessionService {
 
         if(!passwordMatched) throw new Error("Email or password incorrect!");
 
-        const token = sign({}, "1f05234e-eee1-485b-a883-a31f25e0ef6e", {
+        const token = sign({}, process.env.JWT_SECRET, {
             subject: user.id,
             expiresIn: '1d'
         });
