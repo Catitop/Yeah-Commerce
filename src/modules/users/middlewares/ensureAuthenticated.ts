@@ -9,8 +9,12 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
     const [, token] = authHeader.split(" ");
 
     try {
-        verify(token, process.env.JWT_SECRET);
+        const decoded = verify(token, process.env.JWT_SECRET);
+        const { sub } = decoded;
 
+        request.user = {
+            id: sub as string
+        }
         return next();
     } catch {
         return response.status(401).send("Invalid JWT token!");
