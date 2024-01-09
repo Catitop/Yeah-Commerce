@@ -7,12 +7,8 @@ class CreateSessionController {
 
         const createSessionService = new CreateSessionService();
 
-        try {
-            const token = await createSessionService.execute(data);
-            return response.status(200).send({token});
-        } catch(e) {
-            return response.status(403).send(e.message)
-        };
+        const token = await createSessionService.execute(data);
+        return response.status(200).send({token});
     }
 };
 

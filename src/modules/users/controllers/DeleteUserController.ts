@@ -8,14 +8,9 @@ class DeleteUserController {
 
         const deleteUserService = new DeleteUserService();
 
-        try{
-            await deleteUserService.execute(id, loggedUser);
-            return response.status(200).send();
-        } catch(e) {
-            let statusCode = 404;
-            if(e.message === "Operation is not allowed!") statusCode = 400
-            return response.status(statusCode).send(e.message);
-        }
+        await deleteUserService.execute(id, loggedUser);
+
+        return response.status(200).send();
     }
 }
 

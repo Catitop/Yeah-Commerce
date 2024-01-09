@@ -7,14 +7,8 @@ class GetUserController {
 
         const getUserService = new GetUserService();
 
-        try {
-            const user = await getUserService.execute(id);
-            return response.status(200).send(user);
-        } catch (e) {
-            return response.status(400).send(e.message);
-        }
-
-        
+        const user = await getUserService.execute(id);
+        return response.status(200).send(user);
     }
 }
 

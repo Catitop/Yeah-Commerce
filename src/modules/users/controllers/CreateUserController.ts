@@ -8,8 +8,6 @@ class CreateUserController {
         const createUserService = new CreateUserService();
         const result = await createUserService.execute({name, email, password});
 
-        if(result instanceof Error) return response.status(400).send(result.message);
-
         return response.status(201).send(result);
     }
 }

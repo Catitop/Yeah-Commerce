@@ -9,14 +9,8 @@ class UpdateUserController {
 
         const updateUserService = new UpdateUserService();
 
-        try{
-            await updateUserService.execute(id, data, loggedUser);
-            return response.status(200).send();
-        } catch(e) {
-            let statusCode = 400;
-            if(e.message === "User not found!") statusCode = 404;
-            return response.status(statusCode).send(e.message)
-        }
+        await updateUserService.execute(id, data, loggedUser);
+        return response.status(200).send();
     }
 }
 

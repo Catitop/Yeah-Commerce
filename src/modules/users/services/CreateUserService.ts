@@ -1,3 +1,4 @@
+import { AppError } from "../../../shared/errors/AppError";
 import { UserInputDto } from "../dtos/UserInputDto";
 import { UserOutputDto } from "../dtos/UserOutputDto";
 import { User } from "../entities/User";
@@ -8,7 +9,7 @@ import { hash } from "bcryptjs";
 class CreateUserService {
     async execute({name, email, password}: UserInputDto): Promise<UserOutputDto | Error> {
 
-        if(name.length > 80) return new Error("Name is too long!");
+        if(name.length > 80) throw new AppError("Name is too long!", 422);
 
         const userWithSameEmail = await usersRepository.findOne({
             where: {
@@ -16,7 +17,7 @@ class CreateUserService {
             }
         });
 
-        if(userWithSameEmail) return new Error("User already exists!");
+        if(userWithSameEmail) throw new AppError("User already exists!", 400);
 
         const passwordHash = await hash(password, 8);
 

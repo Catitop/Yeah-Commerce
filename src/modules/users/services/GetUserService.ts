@@ -1,3 +1,4 @@
+import { AppError } from "../../../shared/errors/AppError";
 import { UserOutputDto } from "../dtos/UserOutputDto";
 import { usersRepository } from "../repositories/usersRepository";
 
@@ -9,7 +10,7 @@ class GetUserService {
             }
         });
 
-        if(!user) throw new Error("User not found!");
+        if(!user) throw new AppError("User not found!", 404);
 
         const userOutput = new UserOutputDto(user);
 
