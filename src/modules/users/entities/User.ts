@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import {v4 as uuidV4} from "uuid";
 import { UserInputDto } from "../dtos/UserInputDto";
 
@@ -36,6 +36,9 @@ class User {
         name:"updatedat"
     })
     updatedAt: Date;
+
+    @DeleteDateColumn({name: 'deletedat'})
+    deletedAt: Date;
 
     constructor() {
         if(!this.id) {

@@ -6,7 +6,7 @@ class DeleteUserService {
 
         if(!user) throw new Error("User does not exist!")
 
-        await usersRepository.delete(id); 
+        await usersRepository.softDelete(id); 
     }
 }
 
