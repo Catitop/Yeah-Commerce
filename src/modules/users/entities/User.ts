@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import {v4 as uuidV4} from "uuid";
+import { UserInputDto } from "../dtos/UserInputDto";
 
 @Entity("users")
 class User {
@@ -40,6 +41,12 @@ class User {
         if(!this.id) {
             this.id = uuidV4();
         }
+    }
+
+    update(user: UserInputDto) {
+        this.name = user.name;
+        this.email = user.email;
+        this.password = user.password;
     }
 }
 
