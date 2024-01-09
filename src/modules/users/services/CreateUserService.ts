@@ -7,6 +7,9 @@ import { hash } from "bcryptjs";
 
 class CreateUserService {
     async execute({name, email, password}: UserInputDto): Promise<UserOutputDto | Error> {
+
+        if(name.length > 80) return new Error("Name is too long!");
+
         const userWithSameEmail = await usersRepository.findOne({
             where: {
                 email
