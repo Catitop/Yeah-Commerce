@@ -5,11 +5,12 @@ class UpdateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
         const data = request.body;
+        const { id: loggedUser } = request.user;
 
         const updateUserService = new UpdateUserService();
 
         try{
-            await updateUserService.execute(id, data);
+            await updateUserService.execute(id, data, loggedUser);
             return response.status(200).send();
         } catch(e) {
             let statusCode = 400;

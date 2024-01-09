@@ -6,8 +6,9 @@ import { usersRepository } from "../repositories/usersRepository";
 import { hash } from "bcryptjs";
 
 class UpdateUserService {
-    async execute(id: string, {name, email, password}: UserInputDto): Promise<void> {
+    async execute(id: string, {name, email, password}: UserInputDto, loggedUser: string): Promise<void> {
 
+        if(id !== loggedUser) throw new Error("Operation is not allowed!")
         const user = await usersRepository.findById(id);
 
         if(!user) throw new Error("User not found!")
